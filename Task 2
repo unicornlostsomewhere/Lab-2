@@ -1,0 +1,51 @@
+# Напишите функцию, которая будет принимать один аргумент.
+
+# Если в функцию передаётся список, найти сумму после второго
+# отрицательного элемента. Вывести на экран все четные числа.
+
+# Если множество, найти максимальный и минимальный элементы.
+
+# Число – вывести все простые числа до заданного.
+
+# Строка – вывести все цифры отдельным списком. Сделать проверку со всеми этими случаями
+def check_function(argument):
+  if type(argument) == list:
+      negative_numbers = 0
+      sum_numbers = 0
+      even_numbers = []
+      second_negative = False
+      for n in argument:
+          if n < 0:
+             negative_numbers += 1
+             if negative_numbers > 1:
+                 second_negative = True
+          if second_negative and n > 0:
+            sum_numbers += n
+          if n % 2 == 0 and n != 0:
+              even_numbers.append(n)
+      return sum_numbers, even_numbers
+  elif type(argument) == set:
+      max_element = max(argument)
+      min_element = min(argument)
+      return max_element, min_element
+  elif type(argument) == int:
+      primes = []
+      for n in range(2, argument):
+          is_prime = True
+          for i in range(2, int(n**0.5) + 1):
+                  if n%i == 0:
+                      is_prime = False
+                      break
+          if is_prime:
+             primes.append(n)
+      return primes
+  elif type(argument) == str:
+      digit_list = []
+      for n in argument:
+          if n.isdigit():
+              digit_list.append(int(n))
+      return digit_list
+  else:
+    return "You entered an incorrect value."
+
+print(check_function(eval(input("Enter a list/mnozestvo/number/string: "))))
